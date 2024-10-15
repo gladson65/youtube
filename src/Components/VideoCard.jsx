@@ -13,7 +13,7 @@ function VideoCard(props) {
                     <div>
                         <h2>{title}</h2>
                         <h3>{channelId}</h3>
-                        <p>{views}</p>
+                        <p>{views} views</p>
                     </div>
                 </div>
             </div>
