@@ -1,5 +1,6 @@
 import SideBar from "./SideBar";
-import { SampleData } from "../Utils/SampleData";
+import PageStartMessage from "./PageStart.jsx";
+import useFetch from "../Utils/useFetch.js";
 import VideoCard from "./VideoCard";
 import { useState, useEffect } from "react";
 import "../App.css";
@@ -8,27 +9,44 @@ import "../App.css";
 function Contents(props) {
 
     const { isSideBar } = props;
-    const [data, setData] = useState([]);
+    const [content, setContent] = useState([]);
 
+    const { data, error, loading } = useFetch("http://localhost:7100/content")
     useEffect(()=> {
-        setData(SampleData);
+        
+        if (data) {
+            setContent(data)
+        }
+
+
     }, [data])
 
     return(
         <>
-            <div className="w-screen h-auto flex gap-4">
+            <div className="w-screen h-auto pb-20 flex gap-4">
+                
                 {
                     isSideBar &&
                     <SideBar />
                 }
 
-                
-                {/* homepage video contents */}
-                <section className={`content relative grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-20
-                        sm:px-24 md:px-10 mt-2 pt-16
-                        ${isSideBar ? "w-3/4 lg:grid-cols-2 xl:grid-cols-2 gap-10" : "w-full"}`}>
+                {
+                    content.message == "token is not present" || content.message == "jwt expired" ?
+
+                    <div className="mx-auto h-32 bg-white p-6 rounded-xl mt-12 text-center drop-shadow-[0_35px_10px_rgba(0,0,0,0.25)]">
+                        <PageStartMessage />
+                    </div>
+                    
+                    :
+
+                    <>
+                    {/* homepage video contents */}
+                    <section className={`content relative grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-20
+                            sm:px-24 md:px-10 mt-2 pt-16
+                            ${isSideBar ? "w-3/4 lg:grid-cols-2 xl:grid-cols-2 gap-10" : "w-full"}`}>
 
                         {/* filter buttons */}
+                        
                         <div className="filter flex flex-wrap justify-start items-center lg:w-screen py-2 gap-2">
                             <div className="bg-slate-200 px-2 py-1 rounded-xl">All</div>
                             <div className="bg-slate-200 px-2 py-1 rounded-xl">Web Development</div>
@@ -48,15 +66,25 @@ function Contents(props) {
                             <div className="bg-slate-200 px-2 py-1 rounded-xl">Music Theory</div>
                         </div>
 
+                            
+                            
 
 
-                    {
-                        data && 
-                        data.map((data) => {
-                            return <VideoCard key={data.videoId} data={data}/>
-                        })
-                    }
-                </section>
+
+                        {
+                            content.length  >= 1 ? 
+                            content.map((data) => {
+                                return <VideoCard key={data.videoId} data={data}/>
+                            })
+                            :
+                            ""
+                        
+                        }
+                    </section>
+                    </>
+
+
+                }
             </div>
         </>
     )

@@ -45,3 +45,10 @@
     background-color: black;
     color: whitesmoke;
 }
+
+/* startup message */
+.pageStart {
+    width: auto;
+    height: 200px;
+    background-color: aliceblue;
+}
