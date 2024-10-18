@@ -3,7 +3,8 @@ import "../App.css";
 
 function SideBar() {
 
-    
+    // getting username from localstorage
+    const username = localStorage.getItem('username')
 
     return(
         <>
@@ -35,7 +36,9 @@ function SideBar() {
 
                 <div className="flex flex-col">
                     <button className={`bg-sky-200 rounded-full p-2 mb-2`}><span><i className="fa-regular fa-user pr-2 w-4"></i></span>
-                        <span className="hidden md:inline">Sign in</span>
+                        <span className="hidden md:inline">
+                            { localStorage.getItem("login") == 'true' ? username : "Sign in"}
+                        </span>
                     </button>
                 </div>
 
