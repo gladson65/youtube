@@ -105,7 +105,7 @@ export function login(req, res) {
             return res.status(403).json({error: "password", key:"password", message: "Invalid Password"})
         }
         else {
-            let token = jwt.sign({id: data._id}, "secretKey", {expiresIn: '60m'})
+            let token = jwt.sign({id: data._id}, "secretKey", {expiresIn: '600m'})
 
             console.log(token)
             res.json({User: data.username, email: data.email, accessToken: token})
