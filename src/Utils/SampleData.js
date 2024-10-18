@@ -15,10 +15,9 @@ export const SampleData = [
         "uploadDate": "2024-09-27", 
         "comments": [ 
             { 
-                "commentId": "comment07", 
                 "userId":"user07", 
-                "text": "This is a new comment", 
-                "timestamp": "2024-09-21T08:30:00Z" 
+                "text": "This is a third comment", 
+                
             } ] 
     },
 
