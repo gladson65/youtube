@@ -6,9 +6,11 @@ function VideoCard(props) {
 
     return (
         <>
-            <div>
-                <img className="rounded-xl" src={thumbnailUrl}/>
-                <div className="flex gap-4 w-full">
+            <div className="h-full">
+                <div className="h-64 overflow-hidden">
+                    <img className="rounded-xl h-full w-full" src={thumbnailUrl}/>
+                </div>
+                <div className="flex gap-4 w-full mt-4">
                     <img src={channelPic} className="w-14 h-14 rounded-full"/>
                     <div>
                         <h2>{title}</h2>
