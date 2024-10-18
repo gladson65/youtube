@@ -10,29 +10,29 @@ export function register(req, res) {
 
     // Key validations
     if (!username) {
-        return res.status(400).json({message: "Key should be 'username'"})
+        return res.status(400).json({error: "username", message: "Please fill the username"})
     }
 
     if (!email) {
-        return res.status(400).json({message: "Key should be 'email'"})
+        return res.status(400).json({error: "email", message: "Please fill the email"})
     }
 
     if (!password) {
-        return res.status(400).json({message: "Key should be 'password'"})
+        return res.status(400).json({error: "password", message: "please fill the password"})
     }
 
 
     // field validations
     //name validation
     if(username.length < 5) {
-        return res.status(400).json({message: "Full Name must be 5 characters."})
+        return res.status(400).json({error: "username", key:"username", message: "Username must be 5 characters."})
     } 
 
     // email validation
     if(email) {
         let test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
         if (!test) {
-            return res.status(400).json({message: "Invalid Email Format"})
+            return res.status(400).json({error: "email", key:"email", message: "Invalid Email Format"})
         }
     
     }
@@ -41,7 +41,7 @@ export function register(req, res) {
     if(password) {
         let test = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/.test(password);
         if(!test){
-            return res.status(400).json({message: "Password must contain one digit from 1 to 9, one lowercase letter, one uppercase letter, one special character, no space, and it must be 8-16 characters long."})
+            return res.status(400).json({error: "password", key:"password", message: "Password must contain one digit from 1 to 9, one lowercase letter, one uppercase letter, one special character, no space, and it must be 8-16 characters long."})
         }
         
     }
@@ -60,11 +60,11 @@ export function register(req, res) {
             })
 
             newUser.save().then((data) => {
-                res.status(201).json({message: "User Registration Successfull", User: data});
+                res.status(201).json({key: "success", message: "User Registration Successfull", User: data});
             })
         }
         else {
-            return res.status(400).json({message: "User already exist, try with another email"})
+            return res.status(400).json({error: "exist", key:"userexist", message: "User already exist, try with another email"})
         }
     
     }).catch((error) => {
@@ -85,24 +85,24 @@ export function login(req, res) {
 
     // Key validations
     if (!email) {
-        return res.status(400).json({message: "Key should be 'email'"})
+        return res.status(400).json({error: "email", message: "Please fill the email"})
     }
 
     if (!password) {
-        return res.status(400).json({message: "Key should be 'password'"})
+        return res.status(400).json({error: "password", message: "please fill the password"})
     }
 
 
     userModel.findOne({email: email}).then((data) => {
 
         if (!data) {
-            return res.status(400).json({message: "User is not registered"})
+            return res.status(400).json({error: "notRegistered", message: "User is not registered"})
         }
 
         const isValidPassword = bcrypt.compareSync(password, data.password);
 
         if (!isValidPassword) {
-            return res.status(403).json({message: "Invalid Password"})
+            return res.status(403).json({error: "password", key:"password", message: "Invalid Password"})
         }
         else {
             let token = jwt.sign({id: data._id}, "secretKey", {expiresIn: '60m'})

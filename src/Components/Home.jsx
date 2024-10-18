@@ -1,15 +1,20 @@
-import Header from "./Header";
 import Contents from "./Contents";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+
+
 
 function Home() {
 
-    const [isSideBar, setIsSideBar] = useState(false);
+    
+    const [ isLogIn, setIsLogIn ] = useState(false);
+    const [ isSideBar ] = useOutletContext();
+
 
     return(
         <>
-            <Header isSideBar={isSideBar} setIsSideBar={setIsSideBar}/>
-            <Contents isSideBar={isSideBar}/>
+            {/* <Header isSideBar={isSideBar} setIsSideBar={setIsSideBar} isLogIn={isLogIn}/> */}
+            <Contents setIsLogIn={setIsLogIn} isSideBar={isSideBar}/>
         </>
     )
 }

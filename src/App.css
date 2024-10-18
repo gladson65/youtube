@@ -41,6 +41,10 @@
     cursor: pointer;
 }
 
+.filter div:hover {
+    background-color: #FAEBD7;
+}
+
 .filter div:nth-child(1){
     background-color: black;
     color: whitesmoke;
@@ -51,4 +55,13 @@
     width: auto;
     height: 200px;
     background-color: aliceblue;
+}
+
+
+/* video player buttons */
+.video-buttons button {
+    background-color: aliceblue;
+    border-radius: 20px;
+    width: auto;
+    padding: 7px 20px;
 }

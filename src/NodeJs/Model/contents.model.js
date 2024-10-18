@@ -19,6 +19,11 @@ const youtubeContent = new Schema({
         required: true
     },
 
+    videoUrl: {
+        type: String,
+        required: true
+    },
+
     description: {
         type: String,
     },

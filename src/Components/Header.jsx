@@ -7,11 +7,19 @@ import "../App.css";
 function Header(props) {
 
     const {isSideBar, setIsSideBar} = props;
-    const [signIn, setIsSignIN] = useState(false);
+    // const [signIn, setIsSignIN] = useState(false);
 
+    // getting username from localstorage
+    let username = localStorage.getItem('username');
+    
+
+    
+    
     function toggleSideBar() {
         setIsSideBar(!isSideBar);
     }
+
+
 
 
     return (
@@ -37,7 +45,12 @@ function Header(props) {
                 <Link to="/sign-in">
                     <div className="auth flex items-center w-32 flex justify-between">
                         <i className="fa-solid fa-ellipsis-vertical"></i>
-                        <button className="bg-slate-200 rounded-full p-2 hover:bg-sky-200"><span><i className="fa-regular fa-user pr-2"></i></span>Sign in</button>
+                        <button className="bg-slate-200 rounded-full p-2 hover:bg-sky-200">
+                            <span><i className={`fa-regular fa-user pr-2
+                                ${localStorage.getItem("login") == 'true' ? "hidden": ""}`}></i></span>
+                            
+                            { localStorage.getItem("login") == 'true' ? username : "Sign in"}
+                        </button>
                     </div>
                 </Link>
             </header>

@@ -1,12 +1,16 @@
-import Home from './Components/Home'
+import Header from './Components/Header';
+import { Outlet } from 'react-router-dom';
+import { useState } from 'react';
 import './App.css'
 
 function App() {
   
-
+  const [isSideBar, setIsSideBar] = useState(false);
+  
   return (
     <>
-      <Home />
+      <Header isSideBar={isSideBar} setIsSideBar={setIsSideBar}/>
+      <Outlet context={[isSideBar]}/>
     </>
   )
 }

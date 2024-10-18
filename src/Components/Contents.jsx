@@ -4,22 +4,47 @@ import useFetch from "../Utils/useFetch.js";
 import VideoCard from "./VideoCard";
 import { useState, useEffect } from "react";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 
 function Contents(props) {
 
-    const { isSideBar } = props;
-    const [content, setContent] = useState([]);
 
+
+    const { setIsLogIn, isSideBar } = props;
+    const [content, setContent] = useState([]);
+    
+
+    // API call 
     const { data, error, loading } = useFetch("http://localhost:7100/content")
+    
+
     useEffect(()=> {
         
         if (data) {
             setContent(data)
         }
 
+        if (content.length  >= 1) {
+            setIsLogIn(true);       
+        }
+        else if (content.length <= 0) {
+            setIsLogIn(false);
+        }
+
+        else if (data.message == 'jwt expired') {
+            localStorage.setItem('login', 'false');
+        }
+
+        
 
     }, [data])
+
+    if (data && data.message == 'jwt expired') {
+        location.reload;
+    }
+
+
 
     return(
         <>
@@ -27,11 +52,12 @@ function Contents(props) {
                 
                 {
                     isSideBar &&
-                    <SideBar />
+                    <SideBar />                           
+                    
                 }
 
                 {
-                    content.message == "token is not present" || content.message == "jwt expired" ?
+                    content.message == "token is not present" || content.message == "jwt expired" || content.message == "jwt malformed" ?
 
                     <div className="mx-auto h-32 bg-white p-6 rounded-xl mt-12 text-center drop-shadow-[0_35px_10px_rgba(0,0,0,0.25)]">
                         <PageStartMessage />
@@ -42,8 +68,8 @@ function Contents(props) {
                     <>
                     {/* homepage video contents */}
                     <section className={`content relative grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-20
-                            sm:px-24 md:px-10 mt-2 pt-16
-                            ${isSideBar ? "w-3/4 lg:grid-cols-2 xl:grid-cols-2 gap-10" : "w-full"}`}>
+                            sm:px-24 md:px-10 mt-2 pt-16 pb-60
+                            ${isSideBar == true ? "w-3/4 lg:grid-cols-2 xl:grid-cols-2 gap-10" : "w-full"}`}>
 
                         {/* filter buttons */}
                         
@@ -70,11 +96,11 @@ function Contents(props) {
                             
 
 
-
+                        {/* All video contents */}
                         {
                             content.length  >= 1 ? 
-                            content.map((data) => {
-                                return <VideoCard key={data.videoId} data={data}/>
+                            content.map((data, i) => {
+                                return <Link key={i} to={`/video/${data.videoId}`}><VideoCard key={i} data={data}/></Link>
                             })
                             :
                             ""
