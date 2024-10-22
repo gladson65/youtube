@@ -53,3 +53,22 @@ contentRoutes(app);
 // passing app into channelRoutes
 channelRoutes(app);
 
+
+
+// Handeling wrong routes
+app.get('*', function(req, res){
+    res.status(404).json({message: `${req.path} is a wrong path.`})
+})
+
+app.post('*', function(req, res){
+    res.status(404).json({message: `${req.path} is a wrong path.`})
+})
+
+app.put('*', function(req, res){
+    res.status(404).json({message: `${req.path} is a wrong path.`})
+})
+
+app.delete('*', function(req, res){
+    res.status(404).json({message: `${req.path} is a wrong path.`})
+})
+
