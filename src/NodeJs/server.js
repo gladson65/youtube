@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from 'mongoose';
 import { userRoutes } from "./Routes/users.routes.js";
 import { contentRoutes } from "./Routes/content.routes.js";
+import { channelRoutes } from "./Routes/channel.routes.js";
 import cors from 'cors';
 
 
@@ -48,4 +49,7 @@ userRoutes(app);
 
 // passing app into contentRoutes
 contentRoutes(app);
+
+// passing app into channelRoutes
+channelRoutes(app);
 

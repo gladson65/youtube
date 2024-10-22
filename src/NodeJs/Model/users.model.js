@@ -20,6 +20,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
+    },
+
+    channelId: {
+        type: String,
+        required: true,
     }
 })
 

@@ -1,10 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import App from './App.jsx';
+import './index.css';
 
 
 
@@ -12,15 +11,17 @@ import { lazy, Suspense } from 'react';
 const Sign = lazy(()=> import("./Components/SignIn.jsx"));
 const Home = lazy(()=> import("./Components/Home.jsx"));
 const VideoPlayer = lazy(()=> import("./Components/VideoPlayer.jsx"));
+const ChannelPage = lazy(()=> import("./Components/ChannelPage.jsx"));
+const CreateChannel = lazy(()=> import("./Components/CreateChannel.jsx"));
 
 // create routing config
 const appRouter = createBrowserRouter([
   {
-    path: "/",
+    path: "/", 
     element: <App />,
     children: [
       {
-        path: "/home",
+        path: "/",
         element: (
           <Suspense fallback={<div>Loading...</div>}>
             <Home/>
@@ -35,6 +36,26 @@ const appRouter = createBrowserRouter([
             <VideoPlayer />
           </Suspense>
         ),
+      },
+
+      {
+
+        path: "/createchannel",
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <CreateChannel />
+          </Suspense>
+        )
+
+      },
+
+      {
+        path: "/channelpage",
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <ChannelPage />
+          </Suspense>
+        )
       },
     ]
   },

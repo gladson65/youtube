@@ -1,4 +1,5 @@
 import "../App.css";
+import { Link } from "react-router-dom";
 
 
 function SideBar() {
@@ -8,11 +9,13 @@ function SideBar() {
 
     return(
         <>
-            <div className={`sidebar w-10 md:w-1/6 flex flex-col gap-7 h-screen ml-7`}>
-                <div className="flex flex-col items-start gap-2 pt-4">
-                    <button className="rounded-full p-2 w-full flex items-center gap-2"><span><i className="fa-solid fa-house"></i></span>
-                        <span className="hidden md:inline">Home</span>
-                    </button>
+            <div className={`sidebar w-20 sm:w-10 md:w-36 flex flex-col gap-7 h-screen ml-7`}>
+                <div className="flex flex-col items-start gap-2 pt-4 overflow-hidden">
+                    <Link to="/" className="w-auto overflow-hidden">
+                        <button className="rounded-full p-2 w-full flex items-center gap-2"><span><i className="fa-solid fa-house"></i></span>
+                            <span className="hidden md:inline">Home</span>
+                        </button>
+                    </Link>
                     <button className="rounded-full p-2 w-full flex items-center gap-2">
                         <img src="src\assets\shorts.png" className="w-5"/>
                         <span className="hidden md:inline">Shorts</span>

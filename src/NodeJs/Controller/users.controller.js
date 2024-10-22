@@ -52,11 +52,13 @@ export function register(req, res) {
 
         if (!data) {
 
+            let randomId = Math.floor(Math.random() * 100);
             // preparing data to send into database
             const newUser = new userModel({
                 username,
                 email,
-                password: bcrypt.hashSync(password, 10)
+                password: bcrypt.hashSync(password, 10),
+                channelId: `channel${randomId}`,
             })
 
             newUser.save().then((data) => {
@@ -105,7 +107,7 @@ export function login(req, res) {
             return res.status(403).json({error: "password", key:"password", message: "Invalid Password"})
         }
         else {
-            let token = jwt.sign({id: data._id}, "secretKey", {expiresIn: '600m'})
+            let token = jwt.sign({id: data._id}, "secretKey", {expiresIn: '1h'})
 
             console.log(token)
             res.json({User: data.username, email: data.email, accessToken: token})

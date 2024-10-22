@@ -55,9 +55,19 @@ const youtubeContent = new Schema({
         type: String,
     },
 
+    subscriber: {
+        type: String,
+    },
+    
+    email: {
+        type: String,
+        required: true,
+    },
+
     uploadDate: {
         type: String,
-        timestamps: true
+        timestamps: true,
+        default: new Date()
     },
 
     comments: {

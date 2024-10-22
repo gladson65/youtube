@@ -3,6 +3,7 @@ import PageStartMessage from "./PageStart.jsx";
 import useFetch from "../Utils/useFetch.js";
 import VideoCard from "./VideoCard";
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import "../App.css";
 import { Link } from "react-router-dom";
 
@@ -11,18 +12,31 @@ function Contents(props) {
 
 
 
-    const { setIsLogIn, isSideBar } = props;
+    const { setIsLogIn, isSideBar} = props;
+    // context from outlet
+    const context = useOutletContext()
     const [content, setContent] = useState([]);
     
 
     // API call 
     const { data, error, loading } = useFetch("http://localhost:7100/content")
+
+
+    // filter all content
+    function allContent() {
+        setContent(data);
+    }
     
 
     useEffect(()=> {
         
         if (data) {
-            setContent(data)
+            if (context[1].length > 0) {
+                setContent(context[1]);
+            }
+            else{
+                setContent(data)
+            }
         }
 
         if (content.length  >= 1) {
@@ -38,7 +52,7 @@ function Contents(props) {
 
         
 
-    }, [data])
+    }, [data, context[1]])
 
     if (data && data.message == 'jwt expired') {
         location.reload;
@@ -48,7 +62,8 @@ function Contents(props) {
 
     return(
         <>
-            <div className="w-screen h-auto pb-20 flex gap-4">
+            <div className={`w-screen h-auto pb-20 flex gap-4 
+                ${isSideBar && "pl-2"}`}>
                 
                 {
                     isSideBar &&
@@ -59,7 +74,7 @@ function Contents(props) {
                 {
                     content.message == "token is not present" || content.message == "jwt expired" || content.message == "jwt malformed" ?
 
-                    <div className="mx-auto h-32 bg-white p-6 rounded-xl mt-12 text-center drop-shadow-[0_35px_10px_rgba(0,0,0,0.25)]">
+                    <div className="mx-12 sm:mx-auto h-32 bg-white p-6 rounded-xl mt-12 text-center drop-shadow-[0_35px_10px_rgba(0,0,0,0.25)]">
                         <PageStartMessage />
                     </div>
                     
@@ -69,12 +84,12 @@ function Contents(props) {
                     {/* homepage video contents */}
                     <section className={`content relative grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-20
                             sm:px-24 md:px-10 mt-2 pt-16 pb-60
-                            ${isSideBar == true ? "w-3/4 lg:grid-cols-2 xl:grid-cols-2 gap-10" : "w-full"}`}>
+                            ${isSideBar == true ? "w-3/4 lg:grid-cols-2 xl:grid-cols-2 gap-10 px-10" : "w-full"}`}>
 
                         {/* filter buttons */}
                         
                         <div className="filter flex flex-wrap justify-start items-center lg:w-screen py-2 gap-2">
-                            <div className="bg-slate-200 px-2 py-1 rounded-xl">All</div>
+                            <div onClick={allContent} className="bg-slate-200 px-2 py-1 rounded-xl">All</div>
                             <div className="bg-slate-200 px-2 py-1 rounded-xl">Web Development</div>
                             <div className="bg-slate-200 px-2 py-1 rounded-xl">Javascript</div>
                             <div className="bg-slate-200 px-2 py-1 rounded-xl">Data Structures</div>
