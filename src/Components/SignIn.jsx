@@ -117,7 +117,7 @@ function SignIn() {
                 isSign ?
 
                 <>
-                <h1 className="absolute top-20 text-red-500 w-screen py-2 px-20 text-center">{error && error}</h1>
+                <h1 className="absolute top-10 md:top-20 text-red-500 w-screen py-2 px-20 text-center">{error && error}</h1>
                 <div className="bg-yellow-200 pb-7 w-7/12 lg:w-2/5 h-9/12 lg:h-3/5 rounded-2xl drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] overflow-hidden">
                     <h1 className="text-center mt-4 py-2 text-3xl">Sign in</h1>
                     <form className="h-80 mt-7 flex flex-col justify-center gap-2 px-7 pb-4">
@@ -142,7 +142,7 @@ function SignIn() {
                         </div>
                     </form>
 
-                    <div className="flex justify-center mt-6">
+                    <div className="flex justify-center">
                         <h2 className="text-blue-500">Do you have an account?  
                             <span onClick={toggleForm} className="cursor-pointer hover:underline hover:text-blue-700 pl-2">
                                 login
@@ -157,7 +157,7 @@ function SignIn() {
                 
                 
                 <>
-                <h1 className="absolute top-20 text-red-500 w-screen py-2 px-20 text-center">{loginError && loginError}</h1>
+                <h1 className="absolute top-10 md:top-20 text-red-500 w-screen py-2 px-20 text-center">{loginError && loginError}</h1>
                 <div className="bg-green-100 pb-2 h-auto w-7/12 lg:w-2/5 h-3/5 rounded-2xl drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">
                     <h1 className="text-center mt-4 text-slate-700 text-3xl py-2">Log in</h1>
                     <form className="h-80 mt-7 flex flex-col justify-center gap-2 px-7 pb-10">
@@ -179,7 +179,7 @@ function SignIn() {
 
                     </form>
 
-                    <div className="flex justify-center mt-6">
+                    <div className="flex justify-center">
                         <h2 className="text-blue-500">Create an account?  
                             <span onClick={toggleForm} className="cursor-pointer hover:underline hover:text-blue-700 pl-2">
                                 Sign-in

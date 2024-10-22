@@ -218,12 +218,9 @@ function ChannelPage() {
                                 <span className="ml-1">{channelVideos[0].subscriber} subscriber</span> . 
                                 <span className="ml-1">{channelVideos.length} videos</span>
                                 <br />
-                                {
-                                    email == channelVideos[0].email ?
-                                    ""
-                                    :
-                                    <button className="mt-4 bg-black text-white px-2 py-1 rounded-2xl">Subscribe</button>
-                                }
+                                
+                                <button className="mt-4 bg-black hover:bg-red-500 text-white px-2 py-1 rounded-2xl">Subscribe</button>
+                                
                                 
                             </div>
                         </div>

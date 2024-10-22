@@ -8,6 +8,7 @@ import SideVideo from "./SideVideo.jsx";
 import { useOutletContext } from "react-router-dom";
 import Comments from "./Comments.jsx";
 import { findDay } from "../Utils/day.js";
+import { Link } from "react-router-dom";
 
 
 function VideoPlayer() {
@@ -163,9 +164,11 @@ function VideoPlayer() {
                         <div className={`sidebar w-12 md:w-36 flex flex-col gap-7 h-screen ml-7 absolute left-1 bg-white
                             drop-shadow-[10px_10px_10px_black] transition-all`}>
                             <div className="flex flex-col items-start gap-2 pt-4">
-                                <button className="rounded-full p-2 w-full flex items-center gap-2"><span><i className="fa-solid fa-house"></i></span>
-                                    <span className="hidden md:inline">Home</span>
-                                </button>
+                                <Link to="/" className="w-auto overflow-hidden py-2">
+                                    <button className="rounded-full p-2 w-full flex items-center gap-2"><span><i className="fa-solid fa-house"></i></span>
+                                        <span className="hidden md:inline">Home</span>
+                                    </button>
+                                </Link>
                                 <button className="rounded-full p-2 w-full flex items-center gap-2">
                                     <img src="..\src\assets\shorts.png" className="w-5"/>
                                     <span className="hidden md:inline">Shorts</span>
@@ -259,10 +262,23 @@ function VideoPlayer() {
                             </div>
                             
                             <div className="video-buttons flex justify-end items-center gap-2 lg:gap-3 w-6/12 lg:w-3/5">
-                                <button className="hover:bg-sky-200 hidden md:block">Likes</button>
-                                <button className="hover:bg-sky-200">Shares</button>
-                                <button className="hover:bg-sky-200">Download</button>
-                                <button className="hover:bg-sky-200 hidden md:block">Clip</button>
+                                <div className="hidden w-auto px-2 py-2 sm:flex flex justify-between items-center gap-3">
+                                    <span className="flex items-end"><i className="fa-regular fa-thumbs-up hover:text-sky-400 cursor-pointer"></i></span>
+                                    {videoData.likes} |
+                                    <span className="flex items-end"><i className="fa-regular fa-thumbs-down hover:text-red-500 cursor-pointer"></i></span>
+                                </div>
+                                <button className="hover:bg-sky-200">
+                                    <span className="pr-1"><i class="fa-solid fa-share"></i></span>
+                                    <span className="hidden md:inline">Shares</span>
+                                </button>
+                                <button className="hover:bg-sky-200">
+                                    <span className="pr-1"><i class="fa-solid fa-download"></i></span>
+                                    <span className="hidden md:inline">Download</span>
+                                </button>
+                                <button className="hover:bg-sky-200 hidden xl:block">
+                                    <span className="pr-1"><i class="fa-solid fa-scissors"></i></span>
+                                    Clip
+                                </button>
                             </div>
 
                         </div>
@@ -321,7 +337,7 @@ function VideoPlayer() {
                         {/* filter buttons */}
                             
                         <div className="flex flex-wrap justify-start items-center lg:w-screen gap-2 cursor-pointer py-2">
-                            <div className="bg-slate-200 hover:bg-sky-200 px-2 py-1 rounded-xl">All</div>
+                            <div className="bg-black text-white hover:bg-red-500 px-2 py-1 rounded-xl">All</div>
                             <div className="bg-slate-200 hover:bg-sky-200 px-2 py-1 rounded-xl">Web Development</div>
                             <div className="bg-slate-200 hover:bg-sky-200 px-2 py-1 rounded-xl">Javascript</div>
                             <div className="bg-slate-200 hover:bg-sky-200 px-2 py-1 rounded-xl">Data Structures</div>
