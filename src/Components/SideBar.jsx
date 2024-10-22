@@ -38,11 +38,13 @@ function SideBar() {
                 </div>
 
                 <div className="flex flex-col">
-                    <button className={`bg-sky-200 rounded-full p-2 mb-2`}><span><i className="fa-regular fa-user pr-2 w-4"></i></span>
-                        <span className="hidden md:inline">
-                            { localStorage.getItem("login") == 'true' ? username : "Sign in"}
-                        </span>
-                    </button>
+                    <Link to="/sign-in" className="py-2 overflow-hidden">
+                        <button className={`bg-sky-200 rounded-full p-2 mb-2`}><span><i className="fa-regular fa-user pr-2 w-4"></i></span>
+                            <span className="hidden md:inline">
+                                { localStorage.getItem("login") == 'true' ? username : "Sign in"}
+                            </span>
+                        </button>
+                    </Link>
                 </div>
 
                 <div className="flex flex-col items-start gap-2">
