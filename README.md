@@ -1,5 +1,11 @@
 # This is a YouTube Clone project.
-## Build with React.Js + Node.Js + MongoDB
+## Build with 
+    - React.Js  
+    - Node.Js  
+    - MongoDB
+
+
+
 
 
 
