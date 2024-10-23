@@ -13,6 +13,7 @@ const Home = lazy(()=> import("./Components/Home.jsx"));
 const VideoPlayer = lazy(()=> import("./Components/VideoPlayer.jsx"));
 const ChannelPage = lazy(()=> import("./Components/ChannelPage.jsx"));
 const CreateChannel = lazy(()=> import("./Components/CreateChannel.jsx"));
+const Error = lazy(()=> import("./Components/Error.jsx"));
 
 // create routing config
 const appRouter = createBrowserRouter([
@@ -57,7 +58,9 @@ const appRouter = createBrowserRouter([
           </Suspense>
         )
       },
-    ]
+    ],
+
+    errorElement: <Suspense><Error /></Suspense>
   },
 
   {
